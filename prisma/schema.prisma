@@ -1,0 +1,11 @@
+// Euro-Asfalt uses static JSON data files, no database required.
+// This file is kept as placeholder for future database integration.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
