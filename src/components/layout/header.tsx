@@ -6,6 +6,7 @@ import { contacts } from '@/data/contacts';
 
 const navLinks = [
   { href: '/services', label: 'Услуги' },
+  { href: '/services/ukladka-bruschatki', label: 'Укладка брусчатки' },
   { href: '/portfolio', label: 'Портфолио' },
   { href: '/calculator', label: 'Калькулятор' },
   { href: '/blog', label: 'Блог' },

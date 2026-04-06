@@ -18,6 +18,8 @@ export const contacts = {
   social: {
     whatsapp: 'https://wa.me/79859777720',
     telegram: 'https://t.me/+79859777720',
+    instagram: '',
+    vk: '',
   },
   inn: '7701234567',
   ogrn: '1027700123456',

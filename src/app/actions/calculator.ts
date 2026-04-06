@@ -24,6 +24,7 @@ const servicePrices: Record<string, { title: string; priceMin: number; priceMax:
   'ukladka-asfalta': { title: 'Укладка асфальта', priceMin: 1500, priceMax: 2000 },
   'asfaltovanie-parkovok': { title: 'Асфальтирование парковок', priceMin: 1800, priceMax: 2500 },
   'remont-dorog': { title: 'Ремонт дорог (ямочный)', priceMin: 800, priceMax: 1200 },
+  'ukladka-asfaltovoy-kroshki': { title: 'Укладка асфальтовой крошки (ШМА)', priceMin: 400, priceMax: 450 },
   'blagoustrojstvo-territorij': { title: 'Благоустройство территорий', priceMin: 1200, priceMax: 1800 },
   'promyshlennye-ploshadki': { title: 'Промышленные площадки', priceMin: 2200, priceMax: 3000 },
   'dorozhnaya-razmetka': { title: 'Дорожная разметка', priceMin: 150, priceMax: 300 },

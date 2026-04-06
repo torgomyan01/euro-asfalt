@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import MainTemplate from '@/components/layout/main-template/main-template';
 import { blogPosts, getBlogPostBySlug } from '@/data/blog';
+import { blogContentToHtml, legacyBlogContentToHtml } from '@/lib/blog-render';
 import CtaSection from '@/components/home/cta-section';
 
 interface Props {
@@ -83,8 +84,13 @@ export default async function BlogPostPage({ params }: Props) {
 
             {/* Content */}
             <div
-              className="prose prose-lg max-w-none prose-headings:text-asphalt prose-headings:font-bold prose-a:text-accent prose-strong:text-asphalt"
-              dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, '<br>').replace(/## (.*)/g, '<h2>$1</h2>').replace(/### (.*)/g, '<h3>$1</h3>') }}
+              className="prose prose-lg max-w-none prose-headings:text-asphalt prose-headings:font-bold prose-a:text-accent prose-strong:text-asphalt [&_h2]:text-2xl [&_h3]:text-xl"
+              dangerouslySetInnerHTML={{
+                __html:
+                  post.contentFormat === 'blocks'
+                    ? blogContentToHtml(post.content)
+                    : legacyBlogContentToHtml(post.content),
+              }}
             />
 
             {/* Tags */}

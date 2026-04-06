@@ -5,7 +5,9 @@ const serviceLinks = [
   { href: '/services/ukladka-asfalta', label: 'Укладка асфальта' },
   { href: '/services/asfaltovanie-parkovok', label: 'Асфальтирование парковок' },
   { href: '/services/remont-dorog', label: 'Ремонт дорог' },
+  { href: '/services/ukladka-asfaltovoy-kroshki', label: 'Асфальтовая крошка (ШМА)' },
   { href: '/services/blagoustrojstvo-territorij', label: 'Благоустройство' },
+  { href: '/services/ukladka-bruschatki', label: 'Укладка брусчатки' },
   { href: '/services/promyshlennye-ploshadki', label: 'Промышленные площадки' },
   { href: '/services/dorozhnaya-razmetka', label: 'Дорожная разметка' },
 ];

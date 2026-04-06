@@ -10,7 +10,7 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return services.map((s) => ({ slug: s.slug }));
+  return services.filter((s) => s.slug !== 'ukladka-bruschatki').map((s) => ({ slug: s.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
