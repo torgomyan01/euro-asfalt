@@ -182,6 +182,20 @@ export default function Footer() {
             Асфальтирование в Москве и Московской области
           </p>
         </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-4 text-center">
+          <p className="text-white/40 text-xs">
+            Сайт создан и поддерживается{' '}
+            <a
+              href="https://torgomyan-studio.am/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/60 hover:text-accent transition-colors duration-200"
+            >
+              TorgomyanStudio
+            </a>
+            .
+          </p>
+        </div>
       </div>
     </footer>
   );
