@@ -1,20 +1,23 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { contacts } from '@/data/contacts';
 
 export default function HeroSection() {
   return (
     <section className="relative min-h-[90vh] flex items-center bg-asphalt overflow-hidden">
-      {/* Background image */}
+      {/* Background video */}
       <div className="absolute inset-0">
-        <Image
-          src="/images/hero-bg.jpg"
-          alt="Асфальтирование в Москве"
-          fill
-          priority
-          className="object-cover object-center"
-          quality={90}
-        />
+        <video
+          className="w-full h-full object-cover object-center"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/images/hero-bg.jpg"
+          aria-label="Асфальтирование в Москве"
+        >
+          <source src="/videos/asphalt-work.mp4" type="video/mp4" />
+        </video>
         {/* Dark overlay so text stays readable */}
         <div className="absolute inset-0 bg-asphalt/65" />
       </div>
