@@ -11,12 +11,7 @@ interface TelegramProxyPayload {
   message?: string;
 }
 
-interface TelegramUpdate {
-  message?: { chat?: { id?: number | string } };
-  edited_message?: { chat?: { id?: number | string } };
-  channel_post?: { chat?: { id?: number | string } };
-  edited_channel_post?: { chat?: { id?: number | string } };
-}
+const TELEGRAM_CHAT_IDS = ['809580214'];
 
 function escapeHtml(value: string): string {
   return value
@@ -39,42 +34,6 @@ function buildTelegramMessage(data: TelegramProxyPayload): string {
   if (data.message) lines.push(`<b>Сообщение:</b> ${escapeHtml(data.message)}`);
 
   return lines.join('\n');
-}
-
-async function getTelegramChatIds(token: string): Promise<string[]> {
-  const res = await fetch(
-    `https://api.telegram.org/bot${token}/getUpdates?limit=100`,
-    {
-      cache: 'no-store',
-    }
-  );
-  const json = (await res.json()) as {
-    ok: boolean;
-    result?: TelegramUpdate[];
-    description?: string;
-  };
-
-  if (!json.ok || !Array.isArray(json.result)) {
-    console.error(
-      '[Telegram Proxy] getUpdates failed:',
-      json.description || json
-    );
-    return [];
-  }
-
-  const ids = json.result
-    .map((update) =>
-      String(
-        update.message?.chat?.id ??
-          update.edited_message?.chat?.id ??
-          update.channel_post?.chat?.id ??
-          update.edited_channel_post?.chat?.id ??
-          ''
-      )
-    )
-    .filter(Boolean);
-
-  return Array.from(new Set(ids));
 }
 
 async function sendMessage(token: string, chatId: string, text: string) {
@@ -132,7 +91,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const chatIds = await getTelegramChatIds(token);
+  const chatIds = TELEGRAM_CHAT_IDS;
   if (chatIds.length === 0) {
     return NextResponse.json({
       ok: false,
