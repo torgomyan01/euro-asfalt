@@ -3,59 +3,39 @@
 import { writeFile, readFile, mkdir } from 'fs/promises';
 import path from 'path';
 
-async function getTelegramChatIds(token: string): Promise<string[]> {
-  try {
-    const res = await fetch(`https://api.telegram.org/bot${token}/getUpdates?limit=100`);
-    const json = await res.json() as {
-      ok: boolean;
-      result: Array<{ message?: { chat: { id: number } }; channel_post?: { chat: { id: number } } }>;
-    };
-
-    if (json.ok && Array.isArray(json.result)) {
-      const ids = json.result
-        .map((u) => String(u.message?.chat?.id ?? u.channel_post?.chat?.id ?? ''))
-        .filter(Boolean);
-
-      return Array.from(new Set(ids));
-    }
-  } catch (err) {
-    console.error('[Telegram] getUpdates failed:', err);
-  }
-
-  return [];
-}
-
 async function sendTelegramNotification(data: ContactFormData) {
-  const token = process.env.TELEGRAM_BOT_TOKEN;
-  if (!token) return;
-
-  const chatIds = await getTelegramChatIds(token);
-  if (chatIds.length === 0) {
-    console.warn('[Telegram] No chat IDs found');
+  const proxyUrl = process.env.TELEGRAM_PROXY_API_URL || 'https://asfalt-e.vercel.app/api/telegram/notify';
+  const secret = process.env.TELEGRAM_PROXY_SECRET;
+  if (!secret) {
+    console.warn('[Telegram Proxy] TELEGRAM_PROXY_SECRET is not configured');
     return;
   }
 
-  const lines = [
-    '📋 *Новая заявка с сайта*',
-    '',
-    `👤 *Имя:* ${data.name}`,
-    `📞 *Телефон:* ${data.phone}`,
-  ];
-  if (data.service) lines.push(`🔧 *Услуга:* ${data.service}`);
-  if (data.area) lines.push(`📐 *Площадь:* ${data.area} м²`);
-  if (data.message) lines.push(`💬 *Сообщение:* ${data.message}`);
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
 
-  const text = lines.join('\n');
-
-  await Promise.all(
-    chatIds.map((chatId) =>
-      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    try {
+      const res = await fetch(proxyUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'Markdown' }),
-      }).catch((err) => console.error(`[Telegram] Failed to send to ${chatId}:`, err))
-    )
-  );
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Telegram-Proxy-Secret': secret,
+        },
+        body: JSON.stringify(data),
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeout);
+
+      if (res.ok) return;
+
+      console.error(`[Telegram Proxy] Attempt ${attempt} failed with status ${res.status}`);
+    } catch (err) {
+      clearTimeout(timeout);
+      console.error(`[Telegram Proxy] Attempt ${attempt} failed:`, err);
+    }
+  }
 }
 
 export interface ContactFormData {
