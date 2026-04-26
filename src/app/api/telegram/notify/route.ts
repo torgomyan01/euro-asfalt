@@ -134,10 +134,13 @@ export async function POST(req: NextRequest) {
 
   const chatIds = await getTelegramChatIds(token);
   if (chatIds.length === 0) {
-    return NextResponse.json(
-      { ok: false, error: 'No Telegram chat IDs found' },
-      { status: 404 }
-    );
+    return NextResponse.json({
+      ok: false,
+      error: 'No Telegram chat IDs found. Send /start or any message to the bot first.',
+      chatIds: 0,
+      sent: 0,
+      failed: 0,
+    });
   }
 
   const text = buildTelegramMessage(data);
