@@ -120,7 +120,7 @@ export default function BruschatkaCalculatorForm() {
         <div className="space-y-2">
           <span className="text-asphalt font-semibold text-sm">Дополнительные работы</span>
           {[
-            { k: 'base', label: 'Песчано-щебёночное основание', v: hasBase, set: setHasBase },
+            { k: 'base', label: 'Усиленное / дополнительное основание (+ к смете под ключ)', v: hasBase, set: setHasBase },
             { k: 'dem', label: 'Демонтаж старого покрытия', v: hasDemolition, set: setHasDemolition },
             { k: 'geo', label: 'Геотекстиль', v: hasGeotextile, set: setHasGeotextile },
             { k: 'bor', label: 'Бордюрный камень', v: hasBorder, set: setHasBorder },

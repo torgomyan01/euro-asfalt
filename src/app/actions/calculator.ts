@@ -21,12 +21,12 @@ export interface CalculatorResult {
 }
 
 const servicePrices: Record<string, { title: string; priceMin: number; priceMax: number }> = {
-  'ukladka-asfalta': { title: 'Укладка асфальта', priceMin: 1500, priceMax: 2000 },
-  'asfaltovanie-parkovok': { title: 'Асфальтирование парковок', priceMin: 1800, priceMax: 2500 },
+  'ukladka-asfalta': { title: 'Укладка асфальта (до 5 см / с материалом)', priceMin: 1000, priceMax: 1700 },
+  'asfaltovanie-parkovok': { title: 'Асфальтирование парковок', priceMin: 1000, priceMax: 1700 },
   'remont-dorog': { title: 'Ремонт дорог (ямочный)', priceMin: 800, priceMax: 1200 },
-  'ukladka-asfaltovoy-kroshki': { title: 'Укладка асфальтовой крошки (ШМА)', priceMin: 400, priceMax: 450 },
+  'ukladka-asfaltovoy-kroshki': { title: 'Укладка асфальтовой крошки (ШМА)', priceMin: 300, priceMax: 450 },
   'blagoustrojstvo-territorij': { title: 'Благоустройство территорий', priceMin: 1200, priceMax: 1800 },
-  'promyshlennye-ploshadki': { title: 'Промышленные площадки', priceMin: 2200, priceMax: 3000 },
+  'promyshlennye-ploshadki': { title: 'Промышленные площадки', priceMin: 1700, priceMax: 2200 },
   'dorozhnaya-razmetka': { title: 'Дорожная разметка', priceMin: 150, priceMax: 300 },
 };
 

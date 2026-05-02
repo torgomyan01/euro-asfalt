@@ -13,7 +13,7 @@ import { Providers } from '@/app/providers';
 export const metadata: Metadata = {
   metadataBase: new URL('https://euro-asfalt.ru'),
   title: {
-    default: 'Асфальтирование в Москве — Euro-Asfalt | Цена от 1500 руб/м²',
+    default: 'Асфальтирование в Москве — Euro-Asfalt | от 1000 ₽/м², с материалом от 1700 ₽/м²',
     template: '%s | Euro-Asfalt Москва',
   },
   description: 'Профессиональное асфальтирование дорог, парковок и площадок в Москве и Подмосковье. Гарантия 3 года. Бесплатный выезд и замер. Работаем с 2012 года.',

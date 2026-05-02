@@ -18,9 +18,9 @@ export interface BruschatkaCalculatorResult {
 }
 
 const MATERIAL: Record<BruschatkaCalculatorInput['material'], { label: string; min: number; max: number }> = {
-  plitka: { label: 'Укладка тротуарной плитки', min: 1100, max: 1800 },
-  bruschatka: { label: 'Укладка брусчатки', min: 1500, max: 2400 },
-  combo: { label: 'Комбинированная укладка (плитка + брусчатка)', min: 1300, max: 2100 },
+  plitka: { label: 'Укладка тротуарной плитки с основанием под ключ', min: 3500, max: 3500 },
+  bruschatka: { label: 'Укладка брусчатки с основанием под ключ', min: 3500, max: 3500 },
+  combo: { label: 'Комбинированная укладка (плитка + брусчатка), основание под ключ', min: 3500, max: 3500 },
 };
 
 export async function calculateBruschatkaPrice(
@@ -58,12 +58,12 @@ export async function calculateBruschatkaPrice(
     }
 
     if (input.hasBase) {
-      const bMin = 350 * area;
-      const bMax = 600 * area;
+      const bMin = 150 * area;
+      const bMax = 350 * area;
       extraMin += bMin;
       extraMax += bMax;
       breakdown.push({
-        label: 'Устройство песчано-щебёночного основания',
+        label: 'Усиленное / дополнительное основание (к базовой смете под ключ)',
         priceMin: Math.round(bMin),
         priceMax: Math.round(bMax),
       });
@@ -84,12 +84,12 @@ export async function calculateBruschatkaPrice(
     const perimeter = 4 * Math.sqrt(area);
 
     if (input.hasBorder) {
-      const brMin = 450 * perimeter;
-      const brMax = 650 * perimeter;
+      const brMin = 700 * perimeter;
+      const brMax = 1200 * perimeter;
       extraMin += brMin;
       extraMax += brMax;
       breakdown.push({
-        label: 'Установка бордюрного камня (оценка по периметру)',
+        label: 'Установка бордюра с материалом (700–1200 ₽/пм по периметру)',
         priceMin: Math.round(brMin),
         priceMax: Math.round(brMax),
       });

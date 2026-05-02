@@ -108,7 +108,7 @@ export default function BruschatkaServiceView() {
                 Примеры работ
               </a>
             </div>
-            <p className="text-accent font-bold text-xl mt-8">от 1 200 ₽/м²</p>
+            <p className="text-accent font-bold text-xl mt-8">от 3 500 ₽/м² с основанием под ключ</p>
             <p className="text-white/45 text-sm">* ориентировочная цена работ; итог — после замера</p>
           </motion.div>
         </div>
