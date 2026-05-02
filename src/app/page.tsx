@@ -10,6 +10,7 @@ import FaqSection from '@/components/home/faq-section';
 import CtaSection from '@/components/home/cta-section';
 import MapSection from '@/components/home/map-section';
 import { contacts } from '@/data/contacts';
+import { getAverageRating, reviews } from '@/data/reviews';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -53,6 +54,7 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
+  const avgRating = getAverageRating();
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
@@ -69,12 +71,13 @@ export default function HomePage() {
       addressCountry: 'RU',
     },
     areaServed: ['Москва', 'Московская область', 'Подмосковье'],
-    openingHours: 'Mo-Sa 09:00-18:00',
+    openingHours: 'Mo-Sa 08:00-20:00',
     priceRange: '$$',
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: '5.0',
-      reviewCount: '8',
+      ratingValue: String(avgRating),
+      reviewCount: reviews.length,
+      bestRating: 5,
     },
   };
 
